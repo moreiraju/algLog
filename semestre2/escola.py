@@ -1,0 +1,56 @@
+nomes = []
+notas = []
+continuar = "s"
+contador = 0 
+
+while continuar.lower() == "s":
+    nome = input("Nome do aluno: ")
+    
+    
+    nota = -1
+    while nota < 0 or nota > 10:
+        nota = float(input("Nota do aluno (0 a 10): "))
+        if nota < 0 or nota > 10:
+            print("Nota inválida! Digite um valor entre 0 e 10.")
+    
+    nomes.append(nome)
+    notas.append(nota)
+    contador += 1 
+    
+    continuar = input("Deseja cadastrar outro aluno? (s/n): ")
+
+if contador == 0:
+    print("\nNenhum aluno foi cadastrado.")
+else:
+    somaNotas = 0
+    maiorNota = notas[0]
+    menorNota = notas[0]
+    aprovados = 0
+
+    for i in range(contador):
+        somaNotas += notas[i]
+        
+        if notas[i] > maiorNota:
+            maiorNota = notas[i]
+        if notas[i] < menorNota:
+            menorNota = notas[i]
+        if notas[i] >= 7:
+            aprovados += 1
+
+    mediaGeral = somaNotas / contador
+    porcentagemAprovados = (aprovados * 100) / contador
+
+    print("\nRelatório final:")
+    print("Quantidade de alunos cadastrados:", contador)
+    print("Média geral das notas:", round(mediaGeral, 2))
+    print("Maior nota:", maiorNota)
+    print("Menor nota:", menorNota)
+    print("Porcentagem de aprovados:", round(porcentagemAprovados, 2), "%")
+
+    print("\nSituação dos alunos")
+    for i in range(contador):
+        if notas[i] >= 7:
+            situacao = "Aprovado"
+        else:
+            situacao = "Reprovado"
+        print("Aluno:", nomes[i], "| Nota:", notas[i], "| Situação:", situacao)
